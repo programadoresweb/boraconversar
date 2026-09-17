@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     // Substitua 'produtos' pelo nome de qualquer tabela que já exista no seu banco
     const { error } = await supabase
       .from('conversas') 
-      .select('*')
+      .select('id')
       .limit(1)
 
     if (error) throw error
