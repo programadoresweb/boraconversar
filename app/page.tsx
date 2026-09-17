@@ -88,6 +88,25 @@ export default function Home() {
     setUltimaOcultadaVitoria(valor)
   }, [])
 
+  useEffect(() => {
+    if (!('serviceWorker' in navigator)) return
+
+    const registrarServiceWorkerEmBackground = async () => {
+      try {
+        const registration = await navigator.serviceWorker.register('/sw.js', {
+          scope: '/',
+        })
+
+        await registration.update()
+        await navigator.serviceWorker.ready
+      } catch (error) {
+        console.error('Erro ao registrar Service Worker em background:', error)
+      }
+    }
+
+    void registrarServiceWorkerEmBackground()
+  }, [])
+
   // ============================================================
   // REGISTRAR NOTIFICAÇÕES PUSH
   // ============================================================
